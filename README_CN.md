@@ -30,7 +30,7 @@
 | 常用下载 | |
 |---|---|
 | 🇨🇳 简体中文 | [glucose-record-zh-cn.pdf](https://github.com/yuanweize/DiabetesKit/releases/latest/download/glucose-record-zh-cn.pdf) |
-| 🇹🇼 繁體中文 | [glucose-record-zh-tw.pdf](https://github.com/yuanweize/DiabetesKit/releases/latest/download/glucose-record-zh-tw.pdf) |
+| ✍️ 繁體中文 | [glucose-record-zh-tw.pdf](https://github.com/yuanweize/DiabetesKit/releases/latest/download/glucose-record-zh-tw.pdf) |
 | 🇬🇧 English | [glucose-record-en-us.pdf](https://github.com/yuanweize/DiabetesKit/releases/latest/download/glucose-record-en-us.pdf) |
 | 🇯🇵 日本語 | [glucose-record-ja-jp.pdf](https://github.com/yuanweize/DiabetesKit/releases/latest/download/glucose-record-ja-jp.pdf) |
 | 🇰🇷 한국어 | [glucose-record-ko-kr.pdf](https://github.com/yuanweize/DiabetesKit/releases/latest/download/glucose-record-ko-kr.pdf) |
