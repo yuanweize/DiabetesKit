@@ -21,42 +21,42 @@
 
 ## 📥 Quick Download
 
-> **No setup needed!** Just download, print, and start tracking.
+> **No setup needed!** Download, print (A4 Landscape), and start tracking.
 
 | Template | 中文 (Chinese) | English |
 |----------|:-:|:-:|
-| 🩸 Blood Glucose Log | [Download PDF](https://github.com/yuanweize/DiabetesKit/releases/latest/download/blood-glucose-log_zh.pdf) | [Download PDF](https://github.com/yuanweize/DiabetesKit/releases/latest/download/blood-glucose-log_en.pdf) |
-
-> **Print Settings:** A4 paper, **Landscape** orientation, 100% scale.
+| 🩸 Blood Glucose Log | [Download PDF](https://github.com/yuanweize/DiabetesKit/releases/latest/download/glucose-record-zh.pdf) | [Download PDF](https://github.com/yuanweize/DiabetesKit/releases/latest/download/glucose-record-en.pdf) |
 
 ---
 
 ## 💡 About
 
-DiabetesKit is an open-source collection of **printable health management tools** designed specifically for **Type 2 diabetes patients**. Our goal is to make daily health tracking as simple as possible — especially for elderly users.
+**DiabetesKit** is an open-source collection of **printable health management tools** for diabetes patients. Our goal is to make daily health tracking as simple as possible — especially for elderly users.
+
+> Currently focused on Type 2 diabetes management, with plans to expand support for other types and additional health tracking tools.
 
 ### Design Philosophy
 
-- **✨ Simplicity** — Minimal fields, maximum clarity. Easy for elderly users to fill in
-- **🖨️ Print-Ready** — Professional PDF output, optimized for A4 paper
-- **🌍 Multilingual** — Templates available in multiple languages
-- **🔧 Extensible** — Easy to add new templates and languages
+- **✨ Simplicity** — Large fonts, minimal fields, one page per month
+- **🖨️ Print-Ready** — Single-page A4 landscape PDF, optimized for handwriting
+- **🤖 AI-Friendly** — Structured layout designed for easy photo → AI analysis
+- **🌍 Multilingual** — JSON-based i18n system, easy to add new languages
+- **🔧 Extensible** — Add new templates with minimal effort
 
 ### Available Templates
 
 #### 🩸 Blood Glucose Monitoring Log
 
-A monthly record sheet for tracking daily blood glucose readings.
+A single-page monthly record sheet with:
 
-| Field | Description |
-|-------|-------------|
-| Day (1-31) | Pre-filled for the entire month |
-| Time Point | Fasting / After Breakfast / After Lunch / After Dinner / Bedtime |
-| Glucose (mmol/L) | Blood glucose reading |
-| Medication | Simple ✓ or ✗ |
-| Notes | Diet, exercise, or how you feel |
+| Column Group | Fields |
+|:---:|---|
+| **Morning (早)** | Fasting / 2h Post-breakfast |
+| **Noon (中)** | Pre-lunch / 2h Post-lunch |
+| **Evening (晚)** | Pre-dinner / 2h Post-dinner |
+| **Notes** | Medication, diet, exercise, condition |
 
-Includes a **monthly summary** section and **reference ranges** at the bottom.
+Plus: monthly summary section (AI-analyzable), reference ranges, and emergency doctor contact.
 
 ---
 
@@ -64,22 +64,31 @@ Includes a **monthly summary** section and **reference ranges** at the bottom.
 
 ```
 DiabetesKit/
-├── templates/                  # 📋 Printable templates
-│   └── blood-glucose-log/      #    Blood glucose monitoring log
-│       ├── zh/                  #      Chinese version
-│       └── en/                  #      English version
+├── src/                        # 📄 LaTeX source files
+│   └── glucose-record.tex      #    Core template (language-agnostic)
+├── locales/                    # 🌍 i18n locale files (JSON)
+│   ├── zh_CN.json              #    Chinese strings
+│   └── en_US.json              #    English strings
 ├── scripts/                    # 🔧 Build utilities
-│   └── md2pdf.sh               #    Markdown → PDF converter
-├── .github/workflows/          # 🚀 CI/CD pipeline
-│   └── build-and-release.yml   #    Auto-build & release PDFs
-├── output/                     # 📦 Built PDFs (gitignored)
+│   └── gen-locale-tex.py       #    JSON → LaTeX macro generator
+├── pdf/                        # 📦 Built PDFs (gitignored)
+├── .github/workflows/          # 🚀 CI/CD
+│   └── build-and-release.yml   #    Auto-build & release on tag
 ├── Makefile                    # 🎯 Build entry point
 ├── CONTRIBUTING.md             # 🤝 Contribution guide
 ├── CHANGELOG.md                # 📝 Version history
 └── LICENSE                     # ⚖️ MIT License
 ```
 
-> **Adding new tools?** Simply create a new directory under `templates/`, add your `.md` file, and register it in the `Makefile`. See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+### How i18n Works
+
+```
+locales/zh_CN.json  ──→  gen-locale-tex.py  ──→  locale.tex (macros)
+                                                      ↓
+                         src/glucose-record.tex  + locale.tex  ──→  XeLaTeX  ──→  PDF
+```
+
+One LaTeX source, multiple languages. Adding a language = one JSON file + one Makefile rule.
 
 ---
 
@@ -89,64 +98,47 @@ DiabetesKit/
 
 | Tool | Purpose | Install |
 |------|---------|---------|
-| [Pandoc](https://pandoc.org/installing.html) | Document converter | `brew install pandoc` |
-| [XeLaTeX](https://www.tug.org/texlive/) | PDF engine with CJK support | `brew install --cask mactex` |
+| [XeLaTeX](https://www.tug.org/texlive/) | PDF engine (CJK support) | `brew install --cask mactex` |
+| Python 3 | Locale script | Pre-installed on macOS |
 
 ### Build
 
 ```bash
-# Clone the repository
 git clone https://github.com/yuanweize/DiabetesKit.git
 cd DiabetesKit
 
-# Build all PDFs
-make all
-
-# Build specific language
-make zh    # Chinese only
-make en    # English only
-
-# Clean build output
-make clean
-
-# Show available targets
-make help
+make all        # Build all PDFs
+make zh         # Chinese only
+make en         # English only
+make clean      # Remove build artifacts
+make help       # Show targets
 ```
-
-Built PDFs will be in the `output/` directory.
 
 ---
 
 ## 🚀 CI/CD
 
-This project uses **GitHub Actions** to automatically build and release PDFs:
+Push a version tag to auto-build and release:
 
-1. **Trigger**: Push a version tag (e.g., `git tag v1.0.0 && git push --tags`)
-2. **Build**: Compiles all templates into PDFs using Pandoc + XeLaTeX
-3. **Release**: Creates a GitHub Release with all PDFs as downloadable assets
+```bash
+git tag v1.1.0
+git push --tags
+# → GitHub Actions builds PDFs → Creates Release with PDF assets
+```
 
 ---
 
 ## 🤝 Contributing
 
-We welcome contributions! Whether it's:
-- 🌍 **Translations** — Add your language
-- 📋 **New templates** — Blood pressure, medication tracking, etc.
-- 🐛 **Bug fixes** — Report or fix issues
-- 📖 **Documentation** — Improve the guides
+We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed instructions.
-
----
-
-## ❤️ Why This Project?
-
-This project was born from a personal need — helping a 79-year-old grandmother manage her Type 2 diabetes with a simple, printable blood glucose log. We believe healthcare tools should be **free**, **accessible**, and **easy to use** for everyone, regardless of age or technical ability.
-
-If this helps you or someone you love, consider ⭐ starring the repo and sharing it with others who might benefit.
+**Quick ideas:**
+- 🌍 Add your language (just create a `locales/*.json` file)
+- 📋 New templates (blood pressure, medication tracker, etc.)
+- 🐛 Bug fixes and improvements
 
 ---
 
 ## 📄 License
 
-This project is licensed under the [MIT License](LICENSE) — free for personal and commercial use.
+[MIT License](LICENSE) — free for personal and commercial use.

@@ -1,62 +1,52 @@
 # ============================================================================
 # DiabetesKit — Makefile
-# Build all templates into printable PDFs
+# Build printable PDF health management tools from LaTeX sources
 # ============================================================================
 
-SHELL      := /bin/bash
-SCRIPT     := scripts/md2pdf.sh
-OUTPUT_DIR := output
+SHELL     := /bin/bash
+BUILD_DIR := build
+PDF_DIR   := pdf
+SCRIPT    := scripts/gen-locale-tex.py
+TEX_SRC   := src/glucose-record.tex
 
-# ── Template Registry ──────────────────────────────────────────
-# Add new templates here. Format: <template-dir>/<lang>/<filename-without-ext>
-TEMPLATES := \
-	blood-glucose-log/zh/blood-glucose-log \
-	blood-glucose-log/en/blood-glucose-log
-
-# ── Derived paths ──────────────────────────────────────────────
-SOURCES := $(foreach t,$(TEMPLATES),templates/$(t).md)
-PDFS    := $(foreach t,$(TEMPLATES),$(OUTPUT_DIR)/$(t).pdf)
-
-# ============================================================================
-# Targets
-# ============================================================================
-
+# ── Targets ────────────────────────────────────────────────────────
 .PHONY: all zh en clean help
 
-## Build all PDFs (all languages)
-all: $(PDFS)
+all: zh en  ## Build all language variants
 	@echo ""
-	@echo "🎉 All PDFs built successfully!"
-	@echo "   Output directory: $(OUTPUT_DIR)/"
+	@echo "🎉 All PDFs built! → $(PDF_DIR)/"
 
-## Build Chinese PDFs only
-zh: $(filter $(OUTPUT_DIR)/%-zh/%.pdf $(OUTPUT_DIR)/%/zh/%.pdf,$(PDFS))
-	@# Filter Chinese outputs
-	@$(MAKE) $(foreach t,$(filter blood-glucose-log/zh/%,$(TEMPLATES)),$(OUTPUT_DIR)/$(t).pdf)
+zh: $(PDF_DIR)/glucose-record-zh.pdf  ## Build Chinese PDF
 
-## Build English PDFs only
-en:
-	@$(MAKE) $(foreach t,$(filter blood-glucose-log/en/%,$(TEMPLATES)),$(OUTPUT_DIR)/$(t).pdf)
+en: $(PDF_DIR)/glucose-record-en.pdf  ## Build English PDF
 
-## Remove all built PDFs
-clean:
-	@echo "🧹 Cleaning output directory..."
-	rm -rf $(OUTPUT_DIR)
-	@echo "✅ Clean complete."
+clean:  ## Remove build artifacts and PDFs
+	@echo "🧹 Cleaning..."
+	@rm -rf $(BUILD_DIR) $(PDF_DIR)
+	@echo "✅ Done."
 
-## Show this help message
-help:
+help:  ## Show available targets
 	@echo ""
 	@echo "DiabetesKit — Available targets:"
-	@echo "  make all     Build all PDFs (all languages)"
-	@echo "  make zh      Build Chinese PDFs only"
-	@echo "  make en      Build English PDFs only"
-	@echo "  make clean   Remove all built PDFs"
-	@echo "  make help    Show this help message"
-	@echo ""
-	@echo "Output directory: $(OUTPUT_DIR)/"
+	@grep -E '^[a-zA-Z_-]+:.*##' $(MAKEFILE_LIST) | \
+		awk 'BEGIN {FS = ":.*## "}; {printf "  make %-10s %s\n", $$1, $$2}'
 	@echo ""
 
-# ── Generic build rule ─────────────────────────────────────────
-$(OUTPUT_DIR)/%.pdf: templates/%.md $(SCRIPT)
-	@bash $(SCRIPT) "$<" "$@"
+# ── Build Rules ────────────────────────────────────────────────────
+define build_pdf
+	@mkdir -p $(BUILD_DIR) $(PDF_DIR)
+	@echo "📄 Building: $(1) → $(PDF_DIR)/glucose-record-$(2).pdf"
+	@python3 $(SCRIPT) locales/$(1).json > $(BUILD_DIR)/locale.tex
+	@cp $(TEX_SRC) $(BUILD_DIR)/
+	@cd $(BUILD_DIR) && xelatex -interaction=nonstopmode -halt-on-error \
+		-jobname=glucose-record-$(2) glucose-record.tex > glucose-record-$(2).log 2>&1 \
+		|| (echo "❌ Build failed! Log:"; cat glucose-record-$(2).log; exit 1)
+	@cp $(BUILD_DIR)/glucose-record-$(2).pdf $(PDF_DIR)/
+	@echo "✅ Done: $(PDF_DIR)/glucose-record-$(2).pdf"
+endef
+
+$(PDF_DIR)/glucose-record-zh.pdf: $(TEX_SRC) locales/zh_CN.json $(SCRIPT)
+	$(call build_pdf,zh_CN,zh)
+
+$(PDF_DIR)/glucose-record-en.pdf: $(TEX_SRC) locales/en_US.json $(SCRIPT)
+	$(call build_pdf,en_US,en)
