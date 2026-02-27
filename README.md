@@ -19,15 +19,28 @@
 
 ---
 
-**DiabetesKit** is an open-source collection of **printable health management tools** for diabetes patients. Our goal is to make daily health tracking as barrier-free as possible — especially tailored for elderly users.
+**DiabetesKit** is an open-source collection of **printable health management tools** for diabetes patients. Our goal is to make daily health tracking as barrier-free as possible — especially tailored for elderly users. Currently supports **38 languages**.
 
 ## 📥 Quick Download
 
 > **No setup needed!** Download, print (A4 Portrait), and start tracking immediately.
+>
+> Go to the [Latest Release](https://github.com/yuanweize/DiabetesKit/releases/latest) page — all **38 language PDFs** are attached as assets.
 
-| Template | 中文 (Chinese) | English |
-|----------|:-:|:-:|
-| 🩸 Blood Glucose Log | [Download PDF](https://github.com/yuanweize/DiabetesKit/releases/latest/download/glucose-record-zh.pdf) | [Download PDF](https://github.com/yuanweize/DiabetesKit/releases/latest/download/glucose-record-en.pdf) |
+| Popular Downloads | |
+|---|---|
+| 🇨🇳 简体中文 | [glucose-record-zh-cn.pdf](https://github.com/yuanweize/DiabetesKit/releases/latest/download/glucose-record-zh-cn.pdf) |
+| 🇹🇼 繁體中文 | [glucose-record-zh-tw.pdf](https://github.com/yuanweize/DiabetesKit/releases/latest/download/glucose-record-zh-tw.pdf) |
+| 🇬🇧 English | [glucose-record-en-us.pdf](https://github.com/yuanweize/DiabetesKit/releases/latest/download/glucose-record-en-us.pdf) |
+| 🇯🇵 日本語 | [glucose-record-ja-jp.pdf](https://github.com/yuanweize/DiabetesKit/releases/latest/download/glucose-record-ja-jp.pdf) |
+| 🇰🇷 한국어 | [glucose-record-ko-kr.pdf](https://github.com/yuanweize/DiabetesKit/releases/latest/download/glucose-record-ko-kr.pdf) |
+| 🇪🇸 Español | [glucose-record-es-es.pdf](https://github.com/yuanweize/DiabetesKit/releases/latest/download/glucose-record-es-es.pdf) |
+| 🇫🇷 Français | [glucose-record-fr-fr.pdf](https://github.com/yuanweize/DiabetesKit/releases/latest/download/glucose-record-fr-fr.pdf) |
+| 🇩🇪 Deutsch | [glucose-record-de-de.pdf](https://github.com/yuanweize/DiabetesKit/releases/latest/download/glucose-record-de-de.pdf) |
+| 🇸🇦 العربية | [glucose-record-ar-sa.pdf](https://github.com/yuanweize/DiabetesKit/releases/latest/download/glucose-record-ar-sa.pdf) |
+| 🇮🇳 हिन्दी | [glucose-record-hi-in.pdf](https://github.com/yuanweize/DiabetesKit/releases/latest/download/glucose-record-hi-in.pdf) |
+
+> **38 languages in total** — see all on the [Release page](https://github.com/yuanweize/DiabetesKit/releases/latest).
 
 ---
 
@@ -89,7 +102,7 @@ If you are a developer, designer, or want to contribute a translation, see below
 ```
 DiabetesKit/
 ├── src/glucose-record.tex      # 📄 Core LaTeX template (language-agnostic)
-├── locales/*.json              # 🌍 i18n config limits (zh_CN, en_US)
+├── locales/*.json              # 🌍 i18n locale files (38 languages)
 ├── scripts/gen-locale-tex.py   # 🔧 JSON → LaTeX macro generator
 ├── .version                    # 🏷️ Single source of truth for versions
 ├── Makefile                    # 🎯 Build entry point
@@ -104,16 +117,18 @@ The provided `Makefile` makes PDF generation extremely simple:
 git clone https://github.com/yuanweize/DiabetesKit.git
 cd DiabetesKit
 
-make all        # Build all PDFs into the pdf/ directory
-make zh         # Build Chinese version only (glucose-record-zh.pdf)
-make en         # Build English version only (glucose-record-en.pdf)
-make clean      # Clean up compilation artifacts and remove PDFs
+make all        # Build all 38 language PDFs into pdf/
+make list       # Show all auto-discovered locales
+make zh_CN      # Build a single locale (e.g. Simplified Chinese)
+make zh         # Alias for zh_CN (backward compatible)
+make en         # Alias for en_US (backward compatible)
+make clean      # Clean up compilation artifacts
 ```
 
 ### 🤝 Contributing
 
 We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
-- 🌍 **Add your language**: Copy an existing `locales/*.json` file, translate it, add it to the Makefile, and you're done!
+- 🌍 **Add your language**: Copy any `locales/*.json` file, translate it, drop it into `locales/`, and run `make all` — **zero Makefile changes needed!**
 - 📋 **New templates**: E.g. blood pressure log, medication tracker.
 
 ---
