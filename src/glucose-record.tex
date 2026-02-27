@@ -131,7 +131,7 @@
 \end{tabularx}%
 }
 
-\vspace{2mm}
+\vspace{1mm}
 
 % ── Monthly Summary (compact, AI-friendly) ───────────────────────
 \noindent
@@ -151,30 +151,30 @@
 \hline
 \end{tabularx}
 
-\vspace{2mm}
+\vspace{1mm}
 
 % ── Reference Range (colored boxes, large text) ──────────────────
 \noindent
 \fcolorbox{colMorn}{refblue}{%
-  \parbox{0.46\textwidth}{\centering\Large\textbf{\langRefFastingLabel}\\[4pt]\huge\textbf{\langRefFastingValue}}%
+  \parbox{0.46\textwidth}{\centering\Large\textbf{\langRefFastingLabel}\\[2pt]\huge\textbf{\langRefFastingValue}}%
 }%
 \hfill
 \fcolorbox{colNoon}{refgreen}{%
-  \parbox{0.46\textwidth}{\centering\Large\textbf{\langRefPostmealLabel}\\[4pt]\huge\textbf{\langRefPostmealValue}}%
+  \parbox{0.46\textwidth}{\centering\Large\textbf{\langRefPostmealLabel}\\[2pt]\huge\textbf{\langRefPostmealValue}}%
 }
 
-\vspace{2mm}
+\vspace{1mm}
 
 % ── Emergency Warning Banner ─────────────────────────────────────
 \noindent
 \fcolorbox{warnred}{warnbg}{%
   \parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}{%
-    \centering\vspace{3mm}%
+    \centering\vspace{2mm}%
     \textcolor{warnred}{\LARGE\textbf{\langEmergency}}%
-    \\[3mm]
+    \hfill
     {\large
-    \langDoctorName\langColon\underline{\hspace{3cm}} \quad
-    \langDoctorPhone\langColon\underline{\hspace{4cm}}%
+    \langDoctorName\langColon\underline{\hspace{2cm}} \quad
+    \langDoctorPhone\langColon\underline{\hspace{2.5cm}}%
     }\vspace{2mm}%
   }%
 }
