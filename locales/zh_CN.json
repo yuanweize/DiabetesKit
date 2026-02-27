@@ -22,10 +22,10 @@
     "hypo_count": "低血糖次数",
     "analysis": "分析 / 建议",
     "ref_fasting_label": "空腹目标",
-    "ref_fasting_value": "5.0 -- 8.0",
+    "ref_fasting_value": "\\textbf{5.0 -- 8.0}",
     "ref_postmeal_label": "餐后两小时目标",
-    "ref_postmeal_value": "$<$ 11.0",
-    "emergency": "\\textbf{\\large 血糖低于 3.9 或高于 16.7 时，请立即联系医生！}",
+    "ref_postmeal_value": "$<$ \\textbf{11.0}",
+    "emergency": "血糖低于 \\textbf{3.9} 或高于 \\textbf{16.7} 时，请立即联系医生！",
     "doctor_name": "医生",
     "doctor_phone": "电话"
 }

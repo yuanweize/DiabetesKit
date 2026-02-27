@@ -22,10 +22,10 @@
     "hypo_count": "Hypo Episodes",
     "analysis": "Analysis / Notes",
     "ref_fasting_label": "Fasting Target",
-    "ref_fasting_value": "5.0 -- 8.0",
+    "ref_fasting_value": "\\textbf{5.0 -- 8.0}",
     "ref_postmeal_label": "2hrs Post-meal Target",
-    "ref_postmeal_value": "$<$ 11.0",
-    "emergency": "\\textbf{\\large If glucose below 3.9 or above 16.7, contact doctor immediately!}",
+    "ref_postmeal_value": "$<$ \\textbf{11.0}",
+    "emergency": "If glucose below \\textbf{3.9} or above \\textbf{16.7}, contact doctor immediately!",
     "doctor_name": "Doctor",
     "doctor_phone": "Phone"
 }
