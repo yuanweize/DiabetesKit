@@ -120,7 +120,8 @@ make help       # 查看帮助
 推送版本标签即可自动构建发布：
 
 ```bash
-git tag v1.1.0
+VERSION=$(cat .version)
+git tag v$VERSION
 git push --tags
 # → GitHub Actions 构建 PDF → 创建 Release 附带 PDF 下载
 ```

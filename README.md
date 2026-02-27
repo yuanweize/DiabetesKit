@@ -120,7 +120,8 @@ make help       # Show targets
 Push a version tag to auto-build and release:
 
 ```bash
-git tag v1.1.0
+VERSION=$(cat .version)
+git tag v$VERSION
 git push --tags
 # → GitHub Actions builds PDFs → Creates Release with PDF assets
 ```
