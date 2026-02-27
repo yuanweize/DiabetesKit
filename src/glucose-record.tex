@@ -7,17 +7,29 @@
 % ── Geometry: portrait, minimum print margins ─────────────────────
 \usepackage[margin=5mm]{geometry}
 
-% ── Fonts (LuaLaTeX + CJK) ───────────────────────────────────────
+% ── Fonts (LuaLaTeX + multi-script) ───────────────────────────────
+% Supports: CJK (zh-CN/TW, ja, ko), Cyrillic (ru, uk), Arabic (ar),
+%           Devanagari (hi), Thai (th), Vietnamese (vi), Latin + accented
 \usepackage{fontspec}
 \usepackage{luatexja}
 \usepackage{luatexja-fontspec}
-\IfFontExistsTF{Songti SC}{%
-  \setmainjfont{Songti SC}%
+
+% Main Western font — Noto Serif covers Latin, Cyrillic, Greek, Vietnamese
+\IfFontExistsTF{Noto Serif}{%
+  \setmainfont{Noto Serif}%
+}{}
+
+% CJK font — Arial Unicode MS covers zh/ja/ko/th/hi/ar on macOS
+%            Noto Sans CJK SC covers zh/ja/ko on Linux (CI)
+\IfFontExistsTF{Arial Unicode MS}{%
+  \setmainjfont{Arial Unicode MS}%
 }{%
-  \IfFontExistsTF{Noto Serif CJK SC}{%
-    \setmainjfont{Noto Serif CJK SC}%
-  }{%
+  \IfFontExistsTF{Noto Sans CJK SC}{%
     \setmainjfont{Noto Sans CJK SC}%
+  }{%
+    \IfFontExistsTF{Noto Serif CJK SC}{%
+      \setmainjfont{Noto Serif CJK SC}%
+    }{}%
   }%
 }
 
@@ -46,8 +58,8 @@
 \input{locale}
 
 % ── Row Macros ────────────────────────────────────────────────────
-\newcommand{\R}[1]{\large #1 & & & & & & & \\ \hline}
-\newcommand{\Ra}[1]{\rowcolor{altrow}\large #1 & & & & & & & \\ \hline}
+\newcommand{\R}[1]{#1 & & & & & & & \\ \hline}
+\newcommand{\Ra}[1]{\rowcolor{altrow}#1 & & & & & & & \\ \hline}
 
 % ── Document ──────────────────────────────────────────────────────
 \pagestyle{empty}
@@ -55,11 +67,11 @@
 
 % ── Title ─────────────────────────────────────────────────────────
 \begin{center}
-  {\Huge \textbf{\langTitle}} \\[4pt]
+  {\Huge \textbf{\langTitle}} \\[2pt]
   {\Large \langSubtitle \quad\textbar\quad \langUnit}
 \end{center}
 
-\vspace{1mm}
+\vspace{0.5mm}
 
 % ── Patient Info ──────────────────────────────────────────────────
 \noindent{\Large
@@ -69,11 +81,11 @@
   \langAge\langColon\underline{\hspace{2cm}}
 }
 
-\vspace{1.5mm}
+\vspace{1mm}
 
 % ── Main Table ────────────────────────────────────────────────────
 {%
-\renewcommand{\arraystretch}{1.3}%
+\renewcommand{\arraystretch}{1.15}%
 \normalsize%
 \noindent%
 \begin{tabularx}{\textwidth}{%
@@ -87,14 +99,14 @@
   |X|}                                  % Notes
 \hline
 % ── Header: color-coded by time group ────────────────────────────
-\cellcolor{hdr}\textcolor{white}{\normalsize\textbf{\langDay}} &
-\cellcolor{colMorn}\textcolor{white}{\normalsize\textbf{\langColFasting}} &
-\cellcolor{colMorn}\textcolor{white}{\normalsize\textbf{\langColPostBreakfast}} &
-\cellcolor{colNoon}\textcolor{white}{\normalsize\textbf{\langColPreLunch}} &
-\cellcolor{colNoon}\textcolor{white}{\normalsize\textbf{\langColPostLunch}} &
-\cellcolor{colEve}\textcolor{white}{\normalsize\textbf{\langColPreDinner}} &
-\cellcolor{colEve}\textcolor{white}{\normalsize\textbf{\langColPostDinner}} &
-\cellcolor{hdr}\textcolor{white}{\normalsize\textbf{\langNotes}} \\
+\cellcolor{hdr}\textcolor{white}{\small\textbf{\langDay}} &
+\cellcolor{colMorn}\textcolor{white}{\small\textbf{\langColFasting}} &
+\cellcolor{colMorn}\textcolor{white}{\small\textbf{\langColPostBreakfast}} &
+\cellcolor{colNoon}\textcolor{white}{\small\textbf{\langColPreLunch}} &
+\cellcolor{colNoon}\textcolor{white}{\small\textbf{\langColPostLunch}} &
+\cellcolor{colEve}\textcolor{white}{\small\textbf{\langColPreDinner}} &
+\cellcolor{colEve}\textcolor{white}{\small\textbf{\langColPostDinner}} &
+\cellcolor{hdr}\textcolor{white}{\small\textbf{\langNotes}} \\
 \hline
 % ── Data Rows (1–31) ─────────────────────────────────────────────
 \Ra{1}
@@ -131,7 +143,7 @@
 \end{tabularx}%
 }
 
-\vspace{1mm}
+\vspace{0.5mm}
 
 % ── Monthly Summary (compact, AI-friendly) ───────────────────────
 \noindent
@@ -151,31 +163,31 @@
 \hline
 \end{tabularx}
 
-\vspace{1mm}
+\vspace{0.5mm}
 
 % ── Reference Range (colored boxes, large text) ──────────────────
 \noindent
 \fcolorbox{colMorn}{refblue}{%
-  \parbox{0.46\textwidth}{\centering\Large\textbf{\langRefFastingLabel}\\[2pt]\huge\textbf{\langRefFastingValue}}%
+  \parbox{0.46\textwidth}{\centering\large\textbf{\langRefFastingLabel}\\[1pt]\LARGE\textbf{\langRefFastingValue}}%
 }%
 \hfill
 \fcolorbox{colNoon}{refgreen}{%
-  \parbox{0.46\textwidth}{\centering\Large\textbf{\langRefPostmealLabel}\\[2pt]\huge\textbf{\langRefPostmealValue}}%
+  \parbox{0.46\textwidth}{\centering\large\textbf{\langRefPostmealLabel}\\[1pt]\LARGE\textbf{\langRefPostmealValue}}%
 }
 
-\vspace{1mm}
+\vspace{0.5mm}
 
 % ── Emergency Warning Banner ─────────────────────────────────────
 \noindent
 \fcolorbox{warnred}{warnbg}{%
   \parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}{%
-    \centering\vspace{2mm}%
-    \textcolor{warnred}{\LARGE\textbf{\langEmergency}}%
-    \\[2mm]
-    {\large
-    \langDoctorName\langColon\underline{\hspace{4cm}} \quad
-    \langDoctorPhone\langColon\underline{\hspace{4cm}}%
-    }\vspace{1.5mm}%
+    \centering\vspace{1.5mm}%
+    \textcolor{warnred}{\Large\textbf{\langEmergency}}%
+    \\[1.5mm]
+    {\normalsize
+    \langDoctorName\langColon\underline{\hspace{3cm}} \quad
+    \langDoctorPhone\langColon\underline{\hspace{3cm}}%
+    }\vspace{1mm}%
   }%
 }
 

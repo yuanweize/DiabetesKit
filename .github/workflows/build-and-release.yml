@@ -25,9 +25,15 @@ jobs:
             texlive-luatex \
             texlive-latex-extra \
             texlive-fonts-recommended \
+            texlive-fonts-extra \
             texlive-lang-cjk \
             texlive-lang-japanese \
+            texlive-lang-arabic \
+            texlive-lang-other \
+            texlive-lang-european \
             fonts-noto-cjk \
+            fonts-noto-core \
+            fonts-noto-extra \
             lmodern \
             python3
 
@@ -72,8 +78,9 @@ jobs:
           body: |
             ## 📥 Download / 下载
 
-            | Template | 中文 | English |
-            |----------|:---:|:---:|
-            | 🩸 Blood Glucose Log | ✅ | ✅ |
+            This release includes **blood glucose monitoring log** PDFs in all supported languages.
+            Each PDF is a single A4 portrait page, optimized for printing and AI-assisted analysis.
+
+            See `locales/` directory for the full list of supported languages.
 
             **Print:** A4 Portrait / A4 竖向打印

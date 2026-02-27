@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/), and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [2.0.0] - 2026-02-27
+
+### Added
+
+- 🌍 **22 Languages** — Added 20 new locales: zh_TW (繁體中文), ja_JP (日本語), ko_KR (한국어), es_ES, fr_FR, de_DE, pt_BR, ru_RU, ar_SA (العربية), hi_IN (हिन्दी), it_IT, nl_NL, pl_PL, tr_TR, vi_VN, th_TH (ไทย), id_ID, ms_MY, uk_UA, sv_SE.
+
+### Changed
+
+- ⚙️ **Auto-Discovery Makefile** — `make all` now automatically discovers every `locales/*.json` file. Adding a new language requires zero Makefile changes — just drop a JSON file.
+- 🔤 **Pan-CJK Font** — Switched from Chinese-only `Songti SC` to `Arial Unicode MS` (macOS) / `Noto Sans CJK SC` (Linux) for universal CJK+multi-script support.
+- 📐 **Single-Page Guarantee** — Compressed vertical spacing to ensure all 22 languages fit on a single A4 portrait page.
+- 🚀 **CI Multi-Script Fonts** — Added `texlive-lang-arabic`, `texlive-lang-other`, `fonts-noto-core/extra` to CI for global script rendering.
+
 ## [1.5.3] - 2026-02-27
 
 ### Changed
