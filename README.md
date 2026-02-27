@@ -29,6 +29,18 @@
 
 ---
 
+## 🤖 AI Photo Analysis
+
+DiabetesKit logs are structured to be easily read by Vision LLMs (like GPT-4o, Claude 3.5 Sonnet, or Gemini). Try sending a photo of your completed log to an AI with this prompt:
+
+> Act as a professional endocrinologist and analyze this blood glucose monitoring log.
+> 1. Extract the monthly summary data (Average, High, Low, Hypo Episodes).
+> 2. Identify any patterns in glucose fluctuations (e.g., consistent post-meal spikes or high fasting levels).
+> 3. Evaluate the overall control rate based on the personalized reference ranges at the bottom.
+> 4. Provide actionable advice for diet, exercise, or medical consultation, prioritizing any hypoglycemic or severe hyperglycemic events recorded.
+
+---
+
 ## 💡 About
 
 **DiabetesKit** is an open-source collection of **printable health management tools** for diabetes patients. Our goal is to make daily health tracking as simple as possible — especially for elderly users.
