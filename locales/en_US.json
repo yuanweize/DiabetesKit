@@ -21,9 +21,10 @@
     "min": "Low",
     "hypo_count": "Hypo Episodes",
     "analysis": "Analysis / Notes",
-    "ref_fasting": "Fasting 4.4--7.0",
-    "ref_postmeal": "2hrs Post-meal $<$ 10.0",
-    "ref_label": "Reference (mmol/L)",
+    "ref_fasting_label": "Fasting Target",
+    "ref_fasting_value": "5.0 -- 8.0",
+    "ref_postmeal_label": "2hrs Post-meal Target",
+    "ref_postmeal_value": "$<$ 11.0",
     "emergency": "\\textbf{\\large If glucose below 3.9 or above 16.7, contact doctor immediately!}",
     "doctor_name": "Doctor",
     "doctor_phone": "Phone"
