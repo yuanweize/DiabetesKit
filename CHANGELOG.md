@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/), and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.5.1] - 2026-02-27
+
+### Changed
+
+- 🎨 **Typography & Layout Refinements** — Enlarged column headers to match 'Date' column size.
+- 🚨 **Enhanced Emergency Warnings** — Moved the doctor/phone contact details below the emergency warning to prevent layout clipping and dramatically enlarged the warning text.
+- 📐 **Reference Limits Boost** — Enlarged the reference target numbers to `\huge` to improve readability for elderly users.
+
 ## [1.5.0] - 2026-02-27
 
 ### Changed
