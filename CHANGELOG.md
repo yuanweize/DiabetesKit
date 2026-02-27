@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/), and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.5.3] - 2026-02-27
+
+### Changed
+
+- 📐 **Single-Page Guarantee** — Compressed vertical spacing (`\vspace`) slightly around the header and emergency banner to ensure the English version firmly remains on a single A4 page despite the enlarged bold fonts.
+
+## [1.5.2] - 2026-02-27
+
+### Changed
+
+- 🚨 **Bold Critical Numbers** — Added `\textbf{}` wrappers around highly critical reference limits (5.0, 8.0, 11.0, 3.9, 16.7) within both the Chinese and English localized strings to provide ultimate emphasis for elderly patients.
+
 ## [1.5.1] - 2026-02-27
 
 ### Changed
