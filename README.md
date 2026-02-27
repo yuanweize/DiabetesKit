@@ -19,9 +19,11 @@
 
 ---
 
+**DiabetesKit** is an open-source collection of **printable health management tools** for diabetes patients. Our goal is to make daily health tracking as barrier-free as possible — especially tailored for elderly users.
+
 ## 📥 Quick Download
 
-> **No setup needed!** Download, print (A4 Portrait), and start tracking.
+> **No setup needed!** Download, print (A4 Portrait), and start tracking immediately.
 
 | Template | 中文 (Chinese) | English |
 |----------|:-:|:-:|
@@ -29,125 +31,88 @@
 
 ---
 
-## 🤖 AI Photo Analysis
+## 📖 How to Use (+ AI Workflow)
 
-DiabetesKit logs are structured to be easily read by Vision LLMs (like GPT-4o, Claude 3.5 Sonnet, or Gemini). Try sending a photo of your completed log to an AI with this prompt:
+### 1. 🩸 Blood Glucose Monitoring Log
+A single-page monthly record sheet specifically designed for seniors:
+- **Elderly-Friendly Design**: Large cells (A4 Portrait), large fonts, and no cluttered lines to make handwriting easy.
+- **Color-Coded**: Morning (Blue), Noon (Green), Evening (Purple) categorization helps users quickly find the right column.
+- **Personalized Reference Ranges**: Includes relaxed targets suitable for elderly patients with comorbidities, and highlights critical life-threatening readings in screaming red.
 
-> Act as a professional endocrinologist and analyze this blood glucose monitoring log.
-> 1. Extract the monthly summary data (Average, High, Low, Hypo Episodes).
-> 2. Identify any patterns in glucose fluctuations (e.g., consistent post-meal spikes or high fasting levels).
-> 3. Evaluate the overall control rate based on the personalized reference ranges at the bottom.
-> 4. Provide actionable advice for diet, exercise, or medical consultation, prioritizing any hypoglycemic or severe hyperglycemic events recorded.
+### 2. 🤖 AI Monthly Analysis Guide
+The "Monthly Summary" section at the bottom is **NOT meant for the patient to calculate manually** — it's left blank intentionally for AI! 
+
+At the end of the month, **simply snap a photo of the completed page** with your smartphone and send it to any major vision-enabled AI (like ChatGPT, Claude, Gemini, etc.), alongside this specially crafted **Prompt**:
+
+> #### 💡 Copy this prompt to your AI:
+> 
+> ```text
+> Hello! Attached is a photo of a filled-out Blood Glucose monitoring log for this month. Please provide a comprehensive monthly analysis and calculate the numbers needed for the "Monthly Summary" section at the bottom of the table.
+> 
+> Please note: Some cells might be blank (the patient might have forgotten to measure). This is completely normal. Please ignore any blank cells in your calculations, ensure robustness, and do not throw any errors.
+> 
+> Please format your response exactly like this:
+> 
+> ### 1. Monthly Summary Values (Provide the exact numbers so I can copy them into the paper log):
+> - **Avg**: [Calculate the average of all recorded glucose values this month, to 1 decimal place]
+> - **High**: [Find the highest recorded value, and state exactly which day/time it occurred]
+> - **Low**: [Find the lowest recorded value, and state exactly which day/time it occurred]
+> - **Hypo Episodes**: [Count the precise number of times glucose was < 3.9. If none, write 0]
+> 
+> ### 2. Detailed Medical Analysis & Recommendations (Evaluate based on the reference ranges printed on the form):
+> - **Overall Assessment**: How well is the blood glucose controlled this month? What is the rough target achievement rate?
+> - **Patterns or Issues Found**: E.g., "Post-lunch glucose is consistently high" or "An upward trend in fasting glucose towards the end of the month." Correlate this with any text found in the 'Notes' column (e.g., diet details, medication changes) to find root causes.
+> - **Actionable Advice**:
+>   - Diet & Lifestyle: What specific lifestyle adjustments should be considered?
+>   - Medical Review: Does the current plan need adjusting? Ensure you prompt the patient to discuss specific medication adjustments with their doctor at the next visit if patterns warrant it.
+> - **Health Alerts**: Heavily warn about any risks of asymptomatic hypoglycemia or sustained dangerous hyperglycemia.
+> ```
+
+Once the AI returns the data, just copy the numbers into the physical paper for archiving. You also get a professional medical summary ready to show your doctor at the next appointment!
 
 ---
 
-## 💡 About
+## ✨ Design Philosophy
 
-**DiabetesKit** is an open-source collection of **printable health management tools** for diabetes patients. Our goal is to make daily health tracking as simple as possible — especially for elderly users.
-
-> Currently focused on Type 2 diabetes management, with plans to expand support for other types and additional health tracking tools.
-
-### Design Philosophy
-
-- **✨ Simplicity** — Large fonts, minimal fields, one page per month
-- **🖨️ Print-Ready** — Single-page A4 portrait PDF, optimized for handwriting
-- **🤖 AI-Friendly** — Structured layout designed for easy photo → AI analysis
-- **🌍 Multilingual** — JSON-based i18n system, easy to add new languages
-- **🔧 Extensible** — Add new templates with minimal effort
-
-### Available Templates
-
-#### 🩸 Blood Glucose Monitoring Log
-
-A single-page monthly record sheet with:
-
-| Column | Description |
-|:---:|---|
-| **Date** | Day of the month |
-| **Glucose** | Fasting, After Breakfast, Before/After Lunch, Before/After Dinner |
-| **Notes** | Medication, diet, exercise, condition |
-
-Plus: monthly summary section (AI-analyzable), reference ranges, and emergency doctor contact.
+- **Maximum Simplicity** — Remove all visual noise, dedicating the maximum area for handwriting text and numbers.
+- **Analog Collection, AI Intelligence** — Use the most accessible medium (pen and paper) for daily tracking, and leverage cutting-edge Vision-AI for monthly math and pattern-recognition.
+- **Global Architecture** — A pure JSON-based i18n system allows the open-source community to add languages for patients anywhere in the world effortlessly.
 
 ---
 
-## 🏗️ Project Structure
+## 👨‍💻 Developer Guide
+
+If you are a developer, designer, or want to contribute a translation, see below. The repository essentially uses `LuaLaTeX` to render JSON locales into PDFs.
+
+### 🏗️ Project Structure
 
 ```
 DiabetesKit/
-├── src/                        # 📄 LaTeX source files
-│   └── glucose-record.tex      #    Core template (language-agnostic)
-├── locales/                    # 🌍 i18n locale files (JSON)
-│   ├── zh_CN.json              #    Chinese strings
-│   └── en_US.json              #    English strings
-├── scripts/                    # 🔧 Build utilities
-│   └── gen-locale-tex.py       #    JSON → LaTeX macro generator
-├── pdf/                        # 📦 Built PDFs (gitignored)
-├── .github/workflows/          # 🚀 CI/CD
-│   └── build-and-release.yml   #    Auto-build & release on tag
+├── src/glucose-record.tex      # 📄 Core LaTeX template (language-agnostic)
+├── locales/*.json              # 🌍 i18n config limits (zh_CN, en_US)
+├── scripts/gen-locale-tex.py   # 🔧 JSON → LaTeX macro generator
+├── .version                    # 🏷️ Single source of truth for versions
 ├── Makefile                    # 🎯 Build entry point
-├── CONTRIBUTING.md             # 🤝 Contribution guide
-├── CHANGELOG.md                # 📝 Version history
-└── LICENSE                     # ⚖️ MIT License
+└── .github/workflows/          # 🚀 Auto-build & release CI/CD
 ```
 
-### How i18n Works
+### 🔨 Build Locally
 
-```
-locales/zh_CN.json  ──→  gen-locale-tex.py  ──→  locale.tex (macros)
-                                                      ↓
-                         src/glucose-record.tex  + locale.tex  ──→  LuaLaTeX  ──→  PDF
-```
-
-One LaTeX source, multiple languages. Adding a language = one JSON file + one Makefile rule.
-
----
-
-## 🔨 Build Locally
-
-### Prerequisites
-
-| Tool | Purpose | Install |
-|------|---------|---------|
-| [LuaLaTeX](https://www.tug.org/texlive/) | PDF engine (CJK support) | `brew install --cask mactex` |
-| Python 3 | Locale script | Pre-installed on macOS |
-
-### Build
+- **Engine**: LuaLaTeX (included in TeX Live / MacTeX, `brew install --cask mactex`)
+- **Script**: Python 3
 
 ```bash
 git clone https://github.com/yuanweize/DiabetesKit.git
 cd DiabetesKit
-
-make all        # Build all PDFs
-make zh         # Chinese only
-make en         # English only
-make clean      # Remove build artifacts
-make help       # Show targets
+make all        # Build all PDFs into pdf/ 
+make clean      # Clean up temp artifacts
 ```
 
----
-
-## 🚀 CI/CD
-
-Push a version tag to auto-build and release:
-
-```bash
-VERSION=$(cat .version)
-git tag v$VERSION
-git push --tags
-# → GitHub Actions builds PDFs → Creates Release with PDF assets
-```
-
----
-
-## 🤝 Contributing
+### 🤝 Contributing
 
 We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
-
-**Quick ideas:**
-- 🌍 Add your language (just create a `locales/*.json` file)
-- 📋 New templates (blood pressure, medication tracker, etc.)
-- 🐛 Bug fixes and improvements
+- 🌍 **Add your language**: Copy an existing `locales/*.json` file, translate it, add it to the Makefile, and you're done!
+- 📋 **New templates**: E.g. blood pressure log, medication tracker.
 
 ---
 
