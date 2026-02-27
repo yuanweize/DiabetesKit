@@ -38,7 +38,7 @@ define build_pdf
 	@echo "📄 Building: $(1) → $(PDF_DIR)/glucose-record-$(2).pdf"
 	@python3 $(SCRIPT) locales/$(1).json > $(BUILD_DIR)/locale.tex
 	@cp $(TEX_SRC) $(BUILD_DIR)/
-	@cd $(BUILD_DIR) && xelatex -interaction=nonstopmode -halt-on-error \
+	@cd $(BUILD_DIR) && lualatex -interaction=nonstopmode -halt-on-error \
 		-jobname=glucose-record-$(2) glucose-record.tex > glucose-record-$(2).log 2>&1 \
 		|| (echo "❌ Build failed! Log:"; cat glucose-record-$(2).log; exit 1)
 	@cp $(BUILD_DIR)/glucose-record-$(2).pdf $(PDF_DIR)/
