@@ -26,6 +26,7 @@ jobs:
             texlive-latex-extra \
             texlive-fonts-recommended \
             texlive-lang-cjk \
+            texlive-lang-japanese \
             fonts-noto-cjk \
             lmodern \
             python3

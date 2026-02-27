@@ -1,9 +1,9 @@
 <p align="center">
   <h1 align="center">🩸 DiabetesKit</h1>
   <p align="center">
-    Free, printable health management tools for diabetes patients
+    Printable health management tools for diabetes patients
     <br />
-    为糖尿病患者提供免费、可打印的健康管理工具
+    为糖尿病患者提供便捷、可打印的健康管理工具
   </p>
   <p align="center">
     <a href="https://github.com/yuanweize/DiabetesKit/actions/workflows/build-and-release.yml"><img src="https://github.com/yuanweize/DiabetesKit/actions/workflows/build-and-release.yml/badge.svg" alt="Build Status"></a>
@@ -141,4 +141,4 @@ We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
 ## 📄 License
 
-[MIT License](LICENSE) — free for personal and commercial use.
+[MIT License](LICENSE)
