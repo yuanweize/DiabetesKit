@@ -16,12 +16,18 @@
 \usepackage{luatexja-fontspec}
 
 % Main font (Latin, Cyrillic, Arabic, Devanagari, Thai, etc.)
+% macOS: Arial Unicode MS covers everything
+% Linux CI: FreeSerif covers Arabic, Hebrew, Devanagari, Thai, Greek, etc.
 \IfFontExistsTF{Arial Unicode MS}{%
   \setmainfont{Arial Unicode MS}%
 }{%
-  \IfFontExistsTF{Noto Sans}{%
-    \setmainfont{Noto Sans}%
-  }{}%
+  \IfFontExistsTF{FreeSerif}{%
+    \setmainfont{FreeSerif}%
+  }{%
+    \IfFontExistsTF{Noto Sans}{%
+      \setmainfont{Noto Sans}%
+    }{}%
+  }%
 }
 
 % CJK font (Chinese, Japanese, Korean)

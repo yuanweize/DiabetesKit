@@ -34,6 +34,7 @@ jobs:
             fonts-noto-cjk \
             fonts-noto-core \
             fonts-noto-extra \
+            fonts-freefont-ttf \
             lmodern \
             python3
 
