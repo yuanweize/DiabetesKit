@@ -21,7 +21,7 @@
 
 ## 📥 Quick Download
 
-> **No setup needed!** Download, print (A4 Landscape), and start tracking.
+> **No setup needed!** Download, print (A4 Portrait), and start tracking.
 
 | Template | 中文 (Chinese) | English |
 |----------|:-:|:-:|
@@ -38,7 +38,7 @@
 ### Design Philosophy
 
 - **✨ Simplicity** — Large fonts, minimal fields, one page per month
-- **🖨️ Print-Ready** — Single-page A4 landscape PDF, optimized for handwriting
+- **🖨️ Print-Ready** — Single-page A4 portrait PDF, optimized for handwriting
 - **🤖 AI-Friendly** — Structured layout designed for easy photo → AI analysis
 - **🌍 Multilingual** — JSON-based i18n system, easy to add new languages
 - **🔧 Extensible** — Add new templates with minimal effort
@@ -49,11 +49,10 @@
 
 A single-page monthly record sheet with:
 
-| Column Group | Fields |
+| Column | Description |
 |:---:|---|
-| **Morning (早)** | Fasting / 2h Post-breakfast |
-| **Noon (中)** | Pre-lunch / 2h Post-lunch |
-| **Evening (晚)** | Pre-dinner / 2h Post-dinner |
+| **Date** | Day of the month |
+| **Glucose** | Fasting, After Breakfast, Before/After Lunch, Before/After Dinner |
 | **Notes** | Medication, diet, exercise, condition |
 
 Plus: monthly summary section (AI-analyzable), reference ranges, and emergency doctor contact.
@@ -85,7 +84,7 @@ DiabetesKit/
 ```
 locales/zh_CN.json  ──→  gen-locale-tex.py  ──→  locale.tex (macros)
                                                       ↓
-                         src/glucose-record.tex  + locale.tex  ──→  XeLaTeX  ──→  PDF
+                         src/glucose-record.tex  + locale.tex  ──→  LuaLaTeX  ──→  PDF
 ```
 
 One LaTeX source, multiple languages. Adding a language = one JSON file + one Makefile rule.
@@ -98,7 +97,7 @@ One LaTeX source, multiple languages. Adding a language = one JSON file + one Ma
 
 | Tool | Purpose | Install |
 |------|---------|---------|
-| [XeLaTeX](https://www.tug.org/texlive/) | PDF engine (CJK support) | `brew install --cask mactex` |
+| [LuaLaTeX](https://www.tug.org/texlive/) | PDF engine (CJK support) | `brew install --cask mactex` |
 | Python 3 | Locale script | Pre-installed on macOS |
 
 ### Build

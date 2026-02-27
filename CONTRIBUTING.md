@@ -6,7 +6,7 @@
 
 ## English
 
-Thank you for contributing to DiabetesKit! This project provides free, printable health management tools for diabetes patients worldwide.
+Thank you for contributing to DiabetesKit! This project provides printable health management tools for diabetes patients worldwide.
 
 ### How to Contribute
 
@@ -27,12 +27,12 @@ Thank you for contributing to DiabetesKit! This project provides free, printable
 - **Single page** — Every template must fit on one A4 page
 - **Large, clear text** — Target users may be elderly
 - **AI-friendly** — Structured layout for easy photo analysis
-- **Landscape A4** — For tables with multiple columns
+- **Portrait A4** — For tables with many rows (or Landscape if needed)
 
 ### Development Setup
 
 ```bash
-# Prerequisites: XeLaTeX + Python 3
+# Prerequisites: LuaLaTeX + Python 3
 git clone https://github.com/yuanweize/DiabetesKit.git
 cd DiabetesKit
 make all
@@ -42,7 +42,7 @@ make all
 
 ## 中文
 
-感谢您对 DiabetesKit 的贡献！本项目为全球糖尿病患者提供免费、可打印的健康管理工具。
+感谢您对 DiabetesKit 的贡献！本项目为全球糖尿病患者提供可打印的健康管理工具。
 
 ### 如何贡献
 
@@ -63,12 +63,12 @@ make all
 - **单页** — 每个模板必须在一张 A4 纸上完成
 - **字大清晰** — 目标用户可能是老年人
 - **AI 友好** — 结构化布局，便于拍照分析
-- **横向 A4** — 适合多列表格
+- **竖向 A4** — 适合多行表格（如需多列也可横向）
 
 ### 开发环境
 
 ```bash
-# 前置条件：XeLaTeX + Python 3
+# 前置条件：LuaLaTeX + Python 3
 git clone https://github.com/yuanweize/DiabetesKit.git
 cd DiabetesKit
 make all

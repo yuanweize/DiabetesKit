@@ -21,7 +21,7 @@
 
 ## 📥 快速下载
 
-> **无需安装！** 下载 PDF，A4 横向打印，即可使用。
+> **无需安装！** 下载 PDF，A4 竖向打印，即可使用。
 
 | 模板 | 中文 | English |
 |------|:---:|:---:|
@@ -38,7 +38,7 @@
 ### 设计理念
 
 - **✨ 简洁至上** — 大字体、少字段、每月一页
-- **🖨️ 即印即用** — 单页 A4 横向 PDF，方便手写记录
+- **🖨️ 即印即用** — 单页 A4 竖向 PDF，大格子设计，方便老年人手写记录
 - **🤖 AI 友好** — 结构化布局，拍照发给 AI 即可分析当月数据
 - **🌍 多语言** — 基于 JSON 的国际化系统，轻松添加新语言
 - **🔧 易扩展** — 新增模板只需很少的改动
@@ -49,12 +49,11 @@
 
 单页月度记录表，包含：
 
-| 列组 | 字段 |
+| 字段 | 详情 |
 |:---:|---|
-| **早 (Morning)** | 空腹 / 早餐后 2h |
-| **中 (Noon)** | 午餐前 / 午餐后 2h |
-| **晚 (Evening)** | 晚餐前 / 晚餐后 2h |
-| **备注** | 用药、饮食、运动、身体状况 |
+| **日期** | 每月 1-31 日 |
+| **血糖记录** | 空腹、早餐后两小时、午餐前、午餐后两小时、晚餐前、晚餐后两小时 |
+| **备注** | 用药、饮食、运动、身体感觉等 |
 
 另含：月度小结区域（可供 AI 分析）、参考范围、紧急联系医生。
 
@@ -85,7 +84,7 @@ DiabetesKit/
 ```
 locales/zh_CN.json  ──→  gen-locale-tex.py  ──→  locale.tex（宏定义）
                                                       ↓
-                         src/glucose-record.tex  + locale.tex  ──→  XeLaTeX  ──→  PDF
+                         src/glucose-record.tex  + locale.tex  ──→  LuaLaTeX  ──→  PDF
 ```
 
 一份 LaTeX 源码，多种语言输出。添加语言 = 一个 JSON 文件 + 一行 Makefile 规则。
@@ -98,7 +97,7 @@ locales/zh_CN.json  ──→  gen-locale-tex.py  ──→  locale.tex（宏定
 
 | 工具 | 用途 | 安装 |
 |------|------|------|
-| [XeLaTeX](https://www.tug.org/texlive/) | PDF 引擎（CJK 支持）| `brew install --cask mactex` |
+| [LuaLaTeX](https://www.tug.org/texlive/) | PDF 引擎（CJK 支持）| `brew install --cask mactex` |
 | Python 3 | 区域配置脚本 | macOS 自带 |
 
 ### 构建
