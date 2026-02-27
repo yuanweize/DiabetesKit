@@ -31,7 +31,7 @@
 
 ---
 
-## � 如何使用（+ AI 分析流程）
+## 📝 如何使用（+ AI 分析流程）
 
 ### 1. 🩸 血糖监测记录表
 这是一份专为老年人设计的单页月度记录表：
@@ -93,19 +93,26 @@ DiabetesKit/
 ├── scripts/gen-locale-tex.py   # 🔧 JSON → LaTeX 宏生成器
 ├── .version                    # 🏷️ 单信源版本号
 ├── Makefile                    # 🎯 构建入口
-└── .github/workflows/          # � CI/CD 自动构建发布
+└── .github/workflows/          # 🚀 CI/CD 自动发布
 ```
 
 ### 🔨 本地构建要求
 
 - **引擎**: LuaLaTeX （含于 TeX Live / MacTeX，`brew install --cask mactex`）
-- **脚本**: Python 3
+- **脚本**: Python
+
+### 构建指令 (Make Commands)
+
+通过 `Makefile` 我们提供了极其简单的构建命令：
 
 ```bash
 git clone https://github.com/yuanweize/DiabetesKit.git
 cd DiabetesKit
-make all        # 构建所有 PDF (pdf/ 目录下)
-make clean      # 清理构建产物
+
+make all        # 构建所有语言版本的 PDF（默认输出到 pdf/ 目录）
+make zh         # 仅构建中文版本 (glucose-record-zh.pdf)
+make en         # 仅构建英文版本 (glucose-record-en.pdf)
+make clean      # 清理编译过程产生的临时文件和所有 PDF 产物
 ```
 
 ### 🤝 参与贡献

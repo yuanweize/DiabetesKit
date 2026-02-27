@@ -31,7 +31,7 @@
 
 ---
 
-## 📖 How to Use (+ AI Workflow)
+## 📝 How to Use (+ AI Workflow)
 
 ### 1. 🩸 Blood Glucose Monitoring Log
 A single-page monthly record sheet specifically designed for seniors:
@@ -96,16 +96,18 @@ DiabetesKit/
 └── .github/workflows/          # 🚀 Auto-build & release CI/CD
 ```
 
-### 🔨 Build Locally
+### Build Commands
 
-- **Engine**: LuaLaTeX (included in TeX Live / MacTeX, `brew install --cask mactex`)
-- **Script**: Python 3
+The provided `Makefile` makes PDF generation extremely simple:
 
 ```bash
 git clone https://github.com/yuanweize/DiabetesKit.git
 cd DiabetesKit
-make all        # Build all PDFs into pdf/ 
-make clean      # Clean up temp artifacts
+
+make all        # Build all PDFs into the pdf/ directory
+make zh         # Build Chinese version only (glucose-record-zh.pdf)
+make en         # Build English version only (glucose-record-en.pdf)
+make clean      # Clean up compilation artifacts and remove PDFs
 ```
 
 ### 🤝 Contributing
