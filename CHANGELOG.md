@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/), and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [2.1.0] - 2026-02-28
+
+### Added
+
+- 🌍 **38 Languages** — Added 16 more locales: cs_CZ (Čeština), da_DK (Dansk), fi_FI (Suomi), el_GR (Ελληνικά), he_IL (עברית), hu_HU (Magyar), nb_NO (Norsk), ro_RO (Română), sk_SK (Slovenčina), hr_HR (Hrvatski), bg_BG (Български), fil_PH (Filipino), bn_BD (বাংলা), ur_PK (اردو), fa_IR (فارسی), sw_KE (Kiswahili).
+
+### Fixed
+
+- 🔤 **Font Rendering** — Fixed Arabic, Hindi, Thai, Hebrew, Bengali, Urdu, Persian showing as square boxes by switching `\setmainfont` from `Noto Serif` (Latin-only) to `Arial Unicode MS` (universal glyph coverage on macOS) with `Noto Sans` fallback for Linux CI.
+
 ## [2.0.0] - 2026-02-27
 
 ### Added

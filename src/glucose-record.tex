@@ -8,19 +8,23 @@
 \usepackage[margin=5mm]{geometry}
 
 % ── Fonts (LuaLaTeX + multi-script) ───────────────────────────────
-% Supports: CJK (zh-CN/TW, ja, ko), Cyrillic (ru, uk), Arabic (ar),
-%           Devanagari (hi), Thai (th), Vietnamese (vi), Latin + accented
+% Arial Unicode MS on macOS covers ALL scripts: Latin, CJK, Arabic,
+% Devanagari, Thai, Cyrillic, Greek, Hebrew, etc.
+% On Linux (CI): Noto Sans + Noto Sans CJK SC for broad coverage.
 \usepackage{fontspec}
 \usepackage{luatexja}
 \usepackage{luatexja-fontspec}
 
-% Main Western font — Noto Serif covers Latin, Cyrillic, Greek, Vietnamese
-\IfFontExistsTF{Noto Serif}{%
-  \setmainfont{Noto Serif}%
-}{}
+% Main font (Latin, Cyrillic, Arabic, Devanagari, Thai, etc.)
+\IfFontExistsTF{Arial Unicode MS}{%
+  \setmainfont{Arial Unicode MS}%
+}{%
+  \IfFontExistsTF{Noto Sans}{%
+    \setmainfont{Noto Sans}%
+  }{}%
+}
 
-% CJK font — Arial Unicode MS covers zh/ja/ko/th/hi/ar on macOS
-%            Noto Sans CJK SC covers zh/ja/ko on Linux (CI)
+% CJK font (Chinese, Japanese, Korean)
 \IfFontExistsTF{Arial Unicode MS}{%
   \setmainjfont{Arial Unicode MS}%
 }{%
