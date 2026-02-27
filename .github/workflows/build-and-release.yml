@@ -1,0 +1,92 @@
+name: Build and Release PDFs
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build PDFs
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            pandoc \
+            texlive-xetex \
+            texlive-latex-extra \
+            texlive-fonts-recommended \
+            fonts-noto-cjk \
+            lmodern
+
+      - name: Build all PDFs
+        run: make all
+
+      - name: List built PDFs
+        run: find output/ -name '*.pdf' -exec ls -lh {} \;
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: diabetes-kit-pdfs
+          path: output/
+          retention-days: 30
+
+  release:
+    name: Create Release
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download built PDFs
+        uses: actions/download-artifact@v4
+        with:
+          name: diabetes-kit-pdfs
+          path: output/
+
+      - name: Prepare release assets
+        run: |
+          mkdir -p release-assets
+          # Flatten PDFs with descriptive names for easy download
+          for pdf in $(find output/ -name '*.pdf'); do
+            # e.g. output/blood-glucose-log/zh/blood-glucose-log.pdf
+            # → blood-glucose-log_zh.pdf
+            template=$(echo "$pdf" | sed 's|output/||' | cut -d'/' -f1)
+            lang=$(echo "$pdf" | sed 's|output/||' | cut -d'/' -f2)
+            cp "$pdf" "release-assets/${template}_${lang}.pdf"
+          done
+          ls -la release-assets/
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: release-assets/*.pdf
+          generate_release_notes: true
+          body: |
+            ## 📥 Download PDFs / 下载 PDF
+
+            | Template | 中文 (Chinese) | English |
+            |----------|:-:|:-:|
+            | 血糖监测记录表 / Blood Glucose Log | ✅ | ✅ |
+
+            ---
+
+            ### How to Use / 使用方法
+            1. Download the PDF in your language / 下载对应语言的 PDF
+            2. Print it out (A4 Landscape) / 打印（A4 横向）
+            3. Fill in Year & Month at the top / 在顶部填写年月
+            4. Record daily readings / 每日记录血糖值

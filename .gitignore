@@ -1,0 +1,25 @@
+# Build output
+output/
+
+# macOS
+.DS_Store
+._*
+
+# Editor
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# LaTeX auxiliary
+*.aux
+*.log
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+
+# OS
+Thumbs.db
